@@ -1,0 +1,11 @@
+#!/bin/bash -l
+#PBS -N rep_rr
+#PBS -l ncpus=1
+#PBS -l mem=16GB
+#PBS -l walltime=20:00:00
+
+module load r/3.6.2-foss-2019b
+
+cd $PBS_O_WORKDIR
+
+Rscript RJPDMP_SIMS/robust_regression.R

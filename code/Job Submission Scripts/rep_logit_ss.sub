@@ -1,0 +1,11 @@
+#!/bin/bash -l
+#PBS -N Rep_ss
+#PBS -l ncpus=1
+#PBS -l mem=16GB
+#PBS -l walltime=20:00:00
+
+module add atg/R/3.4.1-foss-2016a
+
+cd $PBS_O_WORKDIR
+
+Rscript RJPDMP_SIMS/logistic_regression_subsampling.R

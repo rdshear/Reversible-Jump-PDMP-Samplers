@@ -1,162 +1,57 @@
-JASA Reproducibility Materials Template
-================
+Reversible Jump PDMP Samplers
+=============================
 
-This GitHub repository contains a suggested template structure for authors who
-submit to JASA (either Applications and Case Studies or Theory and
-Methods) to include materials to reproduce analyses, visualizations, and
-tables.
+# Data
 
-We provide this template as a default structure that we (the JASA Associate Editors of Reproducibility) think could be
-useful for many projects, either as is or with modifications by authors.
-However, the template is intended to be helpful and is by no means
-required of authors. Authors should consult [our reproducibility
-guide](https://jasa-acs.github.io/repro-guide) for details on what is
-required of reproducibility materials submitted with JASA revisions (not
-required upon initial submission).
+<!--
+Provide a short (< 100 words), high-level description of the data
+-->
 
-## Why is a template repository useful?
+Examples do not use external data. R scripts to simulate data and simulated .Rdata files are available in the `data` directory. See the Readme in the `data` directory for details.
 
-The purpose of this template repository is to provide a mechanism for
-author(s) to share their materials via a Git repository, hosted on a
-cloud-based repository manager such as GitHub or GitLab. This provides
-the following advantages for author(s):
+# Code
 
-1.  Analyses (including code, narrative text, output, plots, etc) can be
-    version controlled (or branched or forked) allowing original
-    author(s) to continue to develop the analyses or other data analysts
-    to build off the analyses. Also iterations and changes to the
-    analysis are then available via the Git commit history.
-2.  Materials are easily available to other researchers.
-3.  Preparing a repository also makes it easy for the JASA Associate
-    Editors for Reproducibility to copy the materials for a JASA article
-    into the JASA GitHub repository where the final paper products are stored
-    after publication (https://github.com/jasa-acs).
+R code implementing the experiments is located in the `code` directory -- see the readme located there for details. Subdirectories contain code for reproducing the tables and figures, the simulation study and generating the data. All simulations were run on the Lyra high computing cluster at QUT using 3780 x 64bit Intel Xeon Cores with the SUSE Linux operating system (<https://cms.qut.edu.au/__data/assets/pdf_file/0012/388785/high-performance-computing.pdf>). The package rjpdmp should be installed as described in the `code/README.md`.
 
-## How does the process work?
+<!--
+Provide a short (< 100 words), high-level description of the code. If necessary, more details can be provided in files that accompany the code. If no code is provided, please state this and say why (e.g., if the paper contains no computational work).
+-->
+#### Version of primary software used
 
-### Step 1
+Due to version conflict with the R package rstan on the computing cluster we used two versions of R for the experiments. R version 3.4.1 was used for the logistic regression examples and R version 3.6.2 was used for the robust regression examples (where stan was a competitor).
+Details on the R version number of hours, memory and number of parallel jobs are given in the `code/Job Submission Scripts` directory.
 
-Author(s) can create a public GitHub repository in their own GitHub account
-by using this template repository. This template contains a basic 
-skeletal structure to help authors structure their code and analyses for their 
-JASA publication. Creating a repository with the template can be done in the following way: 
+#### Libraries and dependencies used by the code
 
-Click on the "Use this template" button for [this GitHub template repository](https://github.com/jasa-acs/repro-template).
+The R package `rjpdmp` created to implement the methods is given in the `code` directory. Packages rstan_2.19.2 and nimble_0.10.1 were used in simulation studies. Additional packages and dependencies include:
 
-![Click template button](https://docs.github.com/assets/cb-36544/images/help/repository/use-this-template-button.png)
+1. Rcpp_1.0.6 (for R 3.4.1) and Rcpp_1.0.6 (for R 3.6.2)
+2. data.table_1.12.8
+3. ggplot2_3.3.5
+4. gridExtra_2.3   
+5. Rmisc_1.5.1     
+6. rstan_2.19.2
+7. nimble_0.10.1
+8. devtools_2.4.2
+9. RcppArmadillo_0.10.2.1.0
 
-From there, author(s) can [follow these instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template). However do not optionally select "**Include all branches**" as you do not need this for your own projects. 
+<!--
+Include version numbers (e.g., version numbers for any R or Python packages used)
+-->
+
+## Workflow
 
 
-### Step 2
+<!--
+Indicate where the materials (generally including the code, unless in a separate location and indicated in the previous section) are available. We strongly encourage authors to place their materials (but not large datasets) in a Git repository hosted on a site such as GitHub, GitLab, or BitBucket. If the repository is private during the review process, please indicate the location where it will be available publicly upon publication, and also include the materials as a zip file (e.g., obtained directly from the Git hosting site) as supplementary materials.
+-->
 
-The author(s) can then directly edit (or replace) the manuscript template files in their own GitHub repository. Author(s) can also add their own data, code, and other files as needed. 
+All code, output and data are recorded in the GitHub. Simulated data is
+located in the `data` directory and may also be reproduced using the
+scripts from `code/data`. The package rjpdmp should be installed as
+described in the `code/README.md`. Scripts which run the methods on the
+different datasets are located in the `code/Generate Output` directory
+and their outputs are located in the `output` directory. Scripts to
+generate figures 1-5 and the set of 4 tables from the paper can be found
+in directory `code/Figures and Tables`. The figures and tables may be reproduced by simply running the code located in `code/Figures and Tables` they do not require re-simulating all results in the output directory.
 
-For guidance on getting started with git, we recommend the [Happy with git r](https://happygitwithr.com) tutorials.
-
-**Importantly, the authors should provide an overview of how to carry
-out the analyses presented in their manuscript in the `README.md` of their
-repository, replacing the content in this file.** This overview would
-generally refer to scripts/code files that execute the analyses and are
-placed either in the main directory or the `/code` subdirectory. The
-*Workflow* section of the ACC form should refer to this README.md as
-containing the instructions for how to reproduce the analyses.
-
-### Step 3
-
-Author(s) use `git commit` to track changes over time and use `git push`
-to push changes to a repository on the author(s) personal GitHub
-account.
-
-### Step 4
-
-Author(s) submit a link to their GitHub repository as part of the [JASA
-Reproducibility review process](https://jasa-acs.github.io/repro-guide/),
-required upon submission of an invited revision.
-
-### Step 5
-
-JASA Associate Editors for Reproducibility will review the materials in
-the GitHub repository of the authors and submit a
-reproducibility review as part of the standard JASA review process.
-Authors have the opportunity to respond to the review by making changes
-and pushing their changes to their personal GitHub repository.
-
-### Step 6
-
-Once the manuscript is accepted, the materials in the author(s) personal
-GitHub repository will be copied to the [JASA repository](https://github.com/jasa-acs).
-
-## Reproducibility materials file structure
-
-This template provides a suggested file structure for a JASA submission, but authors are free
-to modify this structure.
-
-The suggested components are as follows. Directories in the submission may have subdirectories to
-further organize the materials.
-
-1.  A `README.md` file - This file gives a short description of the
-    paper and an overview of how to carry out the analyses presented in their manuscript.
-2.  A `manuscript` directory - This directory will generally hold the source files
-    (often LaTeX or Rmd) for the manuscript and any files directly related to the
-    generation of the manuscript, including figure files.
-3.  A `data` directory - This directory will generally hold the real data files 
-    (or facsimile versions of them in place of confidential data) and simulated data files.
-    See `data/README.md` for more details. 
-4.  A `code` directory - This directory will generally hold 
-    source code files that contain the core code to implement the method and various utility/auxiliary functions.
-5.  An `output` directory - This directory will generally hold objects derived
-    from computations, including results of simulations or real data analyses. See `output/README.md` for more details.
-
-## Guidance on the use of reproducible environments
-
-Submissions may include the use of reproducible environments capturing
-state of a machine generating manuscript artifacts and even the
-manuscript itself. Here we discuss two types of reproducible
-environments and their use. Both virtual and package environments may be
-put in the `code` directory.
-
-### Package environments
-
-Package environments capture the set of packages used by a programming
-language needed to generate output. The R programming language has
-`renv`, `switchr` and others to accomplish this, Python has `venv`,
-`conda` and others, and Julia has native support (through the `Pkg`
-package). When submitting these types of environments, the following are
-suggested.
-
-1.  Clearly indicate (in the overall `README.md`) the language(s) used (including version) 
-    and the package environment tool used (e.g., `renv`, `conda`).
-2.  Use a single package environment for all reproducible content.
-3.  Prefer packages from package archives (CRAN, Bioconductor,
-    RForge.net for example).
-4.  If you use packages from a code repository (GitHub, GitLab, etc.)
-    then use a release version if possible, or indicate the commit used. You could also consider
-    forking the repository and providing a release.
-
-### Virtual environments
-
-Virtual environments such as Docker and Singlarity capture
-the entire computing environment in which computations were performed.
-In general, they are a more robust solution, capable of taking a
-“snapshot” of a machine, including any system-level utilities and
-external libraries needed to perform your computations. They have the
-advantage that reproducing materials means running the virtual
-environment, rather than recreating the programming language environment.
-If using a virtual environment, we ask that 
-you provide a definition file (e.g., a Dockerfile) or (perhaps better)
-a link to an image in a standard online registry, such as DockerHub.
-
-## References
-
-Gentleman, Robert, and Duncan Temple Lang. “[Statistical Analyses and
-Reproducible
-Research](http://biostats.bepress.com/cgi/viewcontent.cgi?article=1001&context=bioconductor).”
-(2004).
-
-Gentleman, Robert. “[Reproducible research: a bioinformatics case
-study](https://www.degruyter.com/document/doi/10.2202/1544-6115.1034/html).”
-Statistical applications in genetics and molecular biology 4.1 (2005).
-
-Marwick, Ben, and Bryan, Jennifer, and Attali, Dean, and Hollister,
-Jeffrey W. [rrrpkg Github Page](https://github.com/ropensci/rrrpkg).

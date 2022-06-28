@@ -1,0 +1,12 @@
+#!/bin/bash -l
+#PBS -N rep_logit
+#PBS -l ncpus=1
+#PBS -l mem=16GB
+#PBS -l walltime=220:00:00
+#PBS -J 1-60
+
+module add atg/R/3.4.1-foss-2016a
+
+cd $PBS_O_WORKDIR
+
+Rscript RJPDMP_SIMS/logistic_regression_code.R ${PBS_ARRAY_INDEX}

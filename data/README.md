@@ -1,9 +1,11 @@
-Please replace the contents of this file with relevant instructions for your repository or remove this file entirely.
+## Data sets generated for simulation studies
 
-This directory would generally contain the real data files (or facsimile versions of them in place of confidential data) and simulated data files.
+The datasets in this directory may be generated using the appropriate R script located in the `code` directory. The datasets and corresponding scripts are outlined below:
 
-Cleaned data that are produced by processing raw input data might also be placed here.
+1. The 60 datasets investigated in the logistic regression tables (for $n=100,200,400,800$, $p=100,200,400$ and 5 simulation settings). Script `code\generate_logit_data.R`
 
-Code to generate the simulated data and (if relevant) and facsimile data provided in place of confidential real data might also be placed here. 
+2. The Logistic regression subsampling example. Script `code\generate_logit_subsample_data.R`
 
-Code for data cleaning could potentially also be placed here rather than in `code`.
+3. The Robust Regression example. Script `code\generate_robust_data.R`
+
+The data is simulated according to the wording of Section 5 in the manuscript. 
