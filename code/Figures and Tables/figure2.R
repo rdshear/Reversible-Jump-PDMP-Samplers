@@ -22,7 +22,7 @@ matplot(x = exponents,log2(stat_means[,2]/stat_means[,c(1,2,5,6)]),
         type = 'o', pch=1, lty = 1,
         col=c('black','green','blue','magenta'))
 
-legend('bottomleft', legend = c("ZZ","Gibbs","SS","CV"), lwd=1, col=1:4)
+legend('bottomleft', legend = c("ZZ","Gibbs","SS","CV"), lwd=1, col=c('black','green','blue','magenta'))
 title(xlab="log2(number of observations)", ylab="log2(RSE)", main = 'Relative statistical efficiency')
 
 matplot(x = exponents,log2(overall_means[,2]/overall_means[,c(1,2,5,6)]), 
